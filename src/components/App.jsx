@@ -1,10 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import { Row, Col } from 'antd'
-import classnames from 'classnames'
-import styles from './App.less'
-import { Time } from './time/Time'
-import { InterfaceInvokeContainer } from './InterfaceInvoke/InterfaceInvokeContainer'
-import { DataProcessContainer } from './DataProcess/DataProcessContainer'
+import classnames from 'classnames';
+import styles from './App.less';
+import { Toolbar } from './Toolbar/Toolbar'
 
 export class App extends Component {
   state = {}
@@ -12,41 +10,29 @@ export class App extends Component {
   render() {
     let tab_height = document.body.clientHeight
     return (
-      <div className={styles.app_content} style={{height: tab_height, overflow: "auto"}}>
+      <div className={styles.app_content}>
+        <Toolbar/>
 
-        <div className="vbox">
-          <Row className={styles.header}>
-            <Col span={4} className={styles.logo_pic_content}>
-              <img src="src/images/logo.png" alt="" className={styles.logo_pic} />智慧气象服务云平台
+        <Row className={styles.content}>
+          <Col span={16} style={{height: "100%"}}>
+            {/*接口调用*/}
+            <Col span={24} className={styles.interface_container} >
+              <div className={styles.bg_border}>接口调用</div>
             </Col>
-            <Col span={6} className={styles.amount} >59,235,594</Col>
-            <Col span={5} className={styles.today_amount}><img src="src/images/up_icon.svg" alt="" className={styles.up_icon} />175,666</Col>
-            <Col span={5} className={styles.upload_amount}><img src="src/images/down_icon.svg" alt="" className={styles.down_icon} />2,077,777</Col>
-            <Col span={4} className={styles.time_component}>
-              <Time />
+            {/*数据处理*/}
+            <Col span={12} className={styles.data_container}>
+              <div className={styles.bg_border}>数据处理图</div>
             </Col>
-          </Row>
-
-          <div className="hbox">
-            <div className="flex3">
-              <div className="vbox">
-                {/* 接口调用 */}
-                <div className="flex1">
-                  <InterfaceInvokeContainer/>
-                </div>
-                <div className="flex1">
-                  <div className="hbox">
-                    <div className="flex1">
-                      <DataProcessContainer/>
-                    </div>
-                    <div className="flex1">服务器监控</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="flex1">实况数据</div>
-          </div>
-        </div>
+            {/*服务器监控*/}
+            <Col span={12} className={styles.service_container}>
+              <div className={styles.bg_border}>服务器监控</div>
+            </Col>
+          </Col>
+          {/*实况数据*/}
+          <Col span={8} className={styles.real_time_container}>
+            <div className={styles.bg_border}>实况数据</div>
+          </Col>
+        </Row>
 
       </div>
     )
