@@ -5,4 +5,42 @@
   body {
     background: #fafafa;
   }
+  .hbox {
+		display:-webkit-box;
+		display:-moz-box;
+		display:-ms-flexbox;
+		-webkit-box-orient:horizontal;
+		-moz-box-orient:horizontal;
+		box-orient:horizontal;
+		-ms-flex-direction:row;
+		display:box;
+		width:100%;
+	}
+	.vbox {
+		display:-webkit-box;
+		display:-moz-box;
+		display:-ms-flexbox;
+		-webkit-box-orient:vertical;
+		-moz-box-orient:vertical;
+		box-orient:vertical;
+		-ms-flex-direction:column;
+		display:box;
+		height:100%;
+	}
+	.flex (@weight: 1) {
+		-webkit-box-flex: @weight;
+		-moz-box-flex: @weight;
+		-ms-flex: @weight;
+		box-flex: @weight;
+		min-height: 350px;
+	}
+	.flex1 {
+		.flex(1);
+	}
+	.flex2 {
+		.flex(2);
+	}
+	.flex8 {
+		.flex(8)
+	}
 }
