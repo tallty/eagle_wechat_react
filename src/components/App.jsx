@@ -1,20 +1,18 @@
 import React, { Component, PropTypes } from 'react'
 import { Row, Col } from 'antd'
-import classnames from 'classnames';
-import styles from './App.less';
-import { Time } from './time/Time';
+import classnames from 'classnames'
+import styles from './App.less'
+import { Time } from './time/Time'
+import { InterfaceInvokeContainer } from './InterfaceInvoke/InterfaceInvokeContainer'
+import { DataProcessContainer } from './DataProcess/DataProcessContainer'
 
 export class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-    }
-  }
+  state = {}
 
   render() {
     let tab_height = document.body.clientHeight
     return (
-      <div className={styles.App_content} style={{height: tab_height, overflow: "auto"}}>
+      <div className={styles.app_content} style={{height: tab_height, overflow: "auto"}}>
         <Row className={styles.header}>
           <Col span={4} className={styles.logo_pic_content}>
             <img src="src/images/logo.png" alt="" className={styles.logo_pic} />智慧气象服务云平台
@@ -26,28 +24,27 @@ export class App extends Component {
             <Time />
           </Col>
         </Row>
-        <Row className={styles.chart_component}>
-          <Col span={18} className={styles.chart_component_left}>
-            <Row className={styles.chart_component_left_header}>
-              <Col span={24} className={styles.chart_component_port}>
-                接口调用
-              </Col>
-            </Row>
-            <Row>
-              <Col span={12} className={styles.chart_component_data}>
-                数据处理图
-              </Col>
-              <Col span={12} className={styles.chart_component_server}>
-                服务器监控
-              </Col>
-            </Row>
-          </Col>
-          <Col span={6} className={styles.chart_component_real_time}>
-            实况数据
-          </Col>
-        </Row>
+
+        <div className="hbox">
+          <div className="flex3">
+            <div className="vbox">
+              {/* 接口调用 */}
+              <div className="flex1">
+                <InterfaceInvokeContainer/>
+              </div>
+              <div className="hbox">
+                <div className="flex1">
+                  <DataProcessContainer/>
+                </div>
+                <div className="flex1">服务器监控</div>
+              </div>
+            </div>
+          </div>
+          <div className="flex1">实况数据</div>
+        </div>
+
       </div>
-    );
+    )
   }
 }
 
