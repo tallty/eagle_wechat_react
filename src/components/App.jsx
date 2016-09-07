@@ -3,6 +3,7 @@ import { Row, Col } from 'antd'
 import classnames from 'classnames';
 import styles from './App.less';
 import { Time } from './time/Time';
+import { Actually } from './actually/Actually';
 
 export class App extends Component {
   constructor(props) {
@@ -43,7 +44,7 @@ export class App extends Component {
             </Row>
           </Col>
           <Col span={6} className={styles.chart_component_real_time}>
-            实况数据
+            <Actually />
           </Col>
         </Row>
       </div>

@@ -9,7 +9,7 @@ const glob = require('glob');
 module.exports = function (webpackConfig) {
   webpackConfig.babel.plugins.push('transform-runtime');
   webpackConfig.babel.plugins.push(['antd', {
-    style: true,  // if true, use less
+    style: "css",  // if true, use less
   }]);
 
   // Enable this if you have to support IE8.
