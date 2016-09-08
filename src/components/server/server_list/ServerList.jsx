@@ -67,7 +67,76 @@ export class ServerList extends Component {
             硬盘
           </Col>
         </Row>
-        {list}
+        <Row className={styles.scroll_server}>
+          {list}
+          <Row gutter={20} className={styles.server_list_body}>
+            <Col span={6} >
+              <Col span={24} className={styles.server_list_body_col_one}>
+                ppp
+              </Col>
+            </Col>
+            <Col span={6} >
+              <Col span={24} className={styles.server_list_body_col_two}>
+              aaaa
+              </Col>
+            </Col>
+            <Col span={6} >
+              <Col span={24} className={styles.server_list_body_col_three}>
+              dddd
+              </Col>
+            </Col>
+            <Col span={6}>
+              <Col span={24} className={styles.server_list_body_col_four}>
+              wwww
+              </Col>
+            </Col>
+          </Row>
+          <Row gutter={20} className={styles.server_list_body}>
+            <Col span={6} >
+              <Col span={24} className={styles.server_list_body_col_one}>
+                ppp
+              </Col>
+            </Col>
+            <Col span={6} >
+              <Col span={24} className={styles.server_list_body_col_two}>
+              aaaa
+              </Col>
+            </Col>
+            <Col span={6} >
+              <Col span={24} className={styles.server_list_body_col_three}>
+              dddd
+              </Col>
+            </Col>
+            <Col span={6}>
+              <Col span={24} className={styles.server_list_body_col_four}>
+              wwww
+              </Col>
+            </Col>
+          </Row>
+          <Row gutter={20} className={styles.server_list_body}>
+            <Col span={6} >
+              <Col span={24} className={styles.server_list_body_col_one}>
+                ppp
+              </Col>
+            </Col>
+            <Col span={6} >
+              <Col span={24} className={styles.server_list_body_col_two}>
+              aaaa
+              </Col>
+            </Col>
+            <Col span={6} >
+              <Col span={24} className={styles.server_list_body_col_three}>
+              dddd
+              </Col>
+            </Col>
+            <Col span={6}>
+              <Col span={24} className={styles.server_list_body_col_four}>
+              wwww
+              </Col>
+            </Col>
+          </Row>
+        
+        </Row>
       </div>
     );
   }
