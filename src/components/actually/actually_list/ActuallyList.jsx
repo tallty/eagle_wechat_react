@@ -37,7 +37,7 @@ export class ActuallyList extends Component {
   }
 
   componentDidMount() {
-    // console.log(this.props.stations);
+
   }
 
   render() {

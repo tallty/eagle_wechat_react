@@ -17,14 +17,14 @@ export class DataProcess extends Component {
         }
       },
       legend: {data: [], textStyle: {color: '#fff'}},
-      grid: {show: false, left: 2,bottom: 10, right: 10, containLabel: true},
+      grid: {show: false, left: 2, top: 40, bottom: 5, right: 18, containLabel: true},
       xAxis : [
         {
           type: 'time', data: [], splitLine: {show: false},
           axisLabel: { textStyle: {color: '#fff'} }
         }
       ],
-      yAxis : [{type : 'value', splitNumber: 3, axisLabel: {textStyle: {color: '#fff'}}}],
+      yAxis : [{type : 'value',splitNumber: 2, splitLine: {show: false}, axisLabel: {textStyle: {color: '#fff'}}}],
       animation: false,
       series : []
 	  }
@@ -107,10 +107,6 @@ export class DataProcess extends Component {
           data: _data
 	      })
 			})
-
-			console.log(legend_data)
-			console.log(xData)
-			console.log(series)
 
 			let option = this.state.option
 			option.legend.data = legend_data

@@ -31,7 +31,6 @@ export class Statistics extends Component {
                 .set('Accept', 'application/json')
                 .end( (err, res) => {
                   let result = res.body
-                  console.log(result);
                   this.setState({
                     all_interface_count: result.all_interface_count, today_interface_count: result.today_interface_count, upload_count: result.upload_count
                   })

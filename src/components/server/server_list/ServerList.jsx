@@ -12,7 +12,7 @@ export class ServerList extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.machines)
+
   }
 
   showList(){
