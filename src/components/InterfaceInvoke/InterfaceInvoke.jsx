@@ -36,6 +36,7 @@ export class InterfaceInvoke extends Component {
 	    	splitLine: {show: false},
 	    	axisLabel: {textStyle: {color: '#fff'}}
 	    }],
+	    animation: false,
 		  series: []
 		},
 		pie_option: {
@@ -56,6 +57,7 @@ export class InterfaceInvoke extends Component {
 		    y2: 5,
 		    containLabel: true
 		  },
+		  animation: false,
 	    series: [
         {
             name:'访问来源',

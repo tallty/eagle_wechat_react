@@ -16,14 +16,11 @@ export class DataProcess extends Component {
           show: true, type: 'cross', lineStyle: {type: 'dashed', width: 1}
         }
       },
-      legend: {
-        data: [], textStyle: {color: '#fff'}, x: 'left', y: 35, show: true
-      },
-      grid: {borderWidth: 0, x: 24, y: 10, x2: 20, y2: 30},
-
+      legend: {data: [], textStyle: {color: '#fff'}},
+      grid: {show: false, left: 2,bottom: 10, right: 10, containLabel: true},
       xAxis : [
         {
-          type : 'time', splitLine: {show: false},
+          type: 'time', data: [], splitLine: {show: false},
           axisLabel: { textStyle: {color: '#fff'} }
         }
       ],
@@ -62,16 +59,13 @@ export class DataProcess extends Component {
 
 			response.body.task_logs.forEach((item, y, body) => {
 				legend_data.push(item.name)
-				yData.add(item.logs[0].period)
 
 				let _data = []
-
 				item.logs.forEach((log, x, logs) => {
 					if (y === 0) {
-						let time = new Date((item.time).replace(/-/g, "/"))
-						xData.push(time)
-						_data.push([time, log.period, log.spent])
+						xData.push(log.time)
 					}
+					_data.push([log.time, log.period, log.spent])
 				})
 
 				series.push({
@@ -95,7 +89,7 @@ export class DataProcess extends Component {
           },
           symbol: 'circle',
           symbolSize: function (value){
-            v = Math.round(value[2]);
+            let v = Math.round(value[2]);
             if (v < 5) {
               return 5;
             } else if (v > 5 && v < 10){
