@@ -130,7 +130,7 @@ export class DataProcess extends Component {
 	render() {
 		return (
 			<div className={css.container}>
-				<div className={css.title}>接口调用</div>
+				<div className={css.title}>数据处理情况</div>
 				<div id="chart_div" className={css.chart_div}>
 					<Chart {...this.state}/>
 				</div>
