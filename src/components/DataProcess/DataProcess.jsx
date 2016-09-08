@@ -2,92 +2,35 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import css from './data_process.less'
 import SuperAgent from 'superagent'
-import echarts from 'echarts'
-import { DotChart } from './DotChart'
+import { Chart } from '../Chart/Chart'
 
 export class DataProcess extends Component {
+	timer = null
 	state = {
 		height: 100,
 		width: 100,
 		option: {
-		  tooltip : { trigger: 'axis' },
-		  legend: {
-		    x: 'left', 
-		    y: 'top',
-		    textStyle: {color: '#fff'},
-		    data: ['邮件营销','联盟广告','视频广告','直接访问','搜索引擎']
-		  },
-		  grid: {
-		    show: false, 
-		    borderWidth: 0, 
-		    x: 50, 
-		    x2: 15, 
-		    y2: 35,
-		    containLabel: true
-		  },
-		  xAxis : [{
-		    type: 'category',
-		    boundaryGap: false,
-		    splitLine: {show: false},
-		    axisLabel: {textStyle: {color: '#fff'}},
-		    data : ['周一','周二','周三','周四','周五','周六','周日']
-		  }],
-		  yAxis : [
-		    {
-		    	type: 'value', 
-		    	splitLine: {show: false},
-		    	axisLabel: {textStyle: {color: '#fff'}}
-		    }
-		  ],
-		  series : [
-	    	{
-	          name:'邮件营销',
-	          type:'line',
-	          stack: '总量',
-	          areaStyle: {normal: {}},
-	          itemStyle: {normal: {areaStyle: {type: 'default'}}},
-	          data:[120, 132, 101, 134, 90, 230, 210]
-	      },
-	      {
-	          name:'联盟广告',
-	          type:'line',
-	          stack: '总量',
-	          areaStyle: {normal: {}},
-	          itemStyle: {normal: {areaStyle: {type: 'default'}}},
-	          data:[220, 182, 191, 234, 290, 330, 310]
-	      },
-	      {
-	          name:'视频广告',
-	          type:'line',
-	          stack: '总量',
-	          areaStyle: {normal: {}},
-	          itemStyle: {normal: {areaStyle: {type: 'default'}}},
-	          data:[150, 232, 201, 154, 190, 330, 410]
-	      },
-	      {
-	          name:'直接访问',
-	          type:'line',
-	          stack: '总量',
-	          areaStyle: {normal: {}},
-	          itemStyle: {normal: {areaStyle: {type: 'default'}}},
-	          data:[320, 332, 301, 334, 390, 330, 320]
-	      },
-	      {
-	          name:'搜索引擎',
-	          type:'line',
-	          stack: '总量',
-	          label: {
-	              normal: {
-	                  show: true,
-	                  position: 'top'
-	              }
-	          },
-	          areaStyle: {normal: {}},
-	          itemStyle: {normal: {areaStyle: {type: 'default'}}},
-	          data:[820, 932, 901, 934, 1290, 1330, 1320]
-	      }
-		  ]
-		}
+      tooltip: {
+        trigger: 'axis',
+        axisPointer:{
+          show: true, type: 'cross', lineStyle: {type: 'dashed', width: 1}
+        }
+      },
+      legend: {
+        data: [], textStyle: {color: '#fff'}, x: 'left', y: 35, show: true
+      },
+      grid: {borderWidth: 0, x: 24, y: 10, x2: 20, y2: 30},
+
+      xAxis : [
+        {
+          type : 'time', splitLine: {show: false},
+          axisLabel: { textStyle: {color: '#fff'} }
+        }
+      ],
+      yAxis : [{type : 'value', splitNumber: 3, axisLabel: {textStyle: {color: '#fff'}}}],
+      animation: false,
+      series : []
+	  }
 	}
 
 	componentDidMount() {
@@ -95,14 +38,93 @@ export class DataProcess extends Component {
 		let width = row.clientWidth
 		let height = row.clientHeight
 
-		SuperAgent.get('http://mcu.buoyantec.com/monitor/task_logs.json')
-					.set('Accept', 'application/json')
-					.end((error, response) => {
-						this.setState({
-							height: height,
-							width: width
-						})
-					})
+		this.setState({
+			height: height,
+			width: width
+		})
+		
+		this.processData()
+		this.timer = setInterval(this.processData.bind(this), 10000)
+	}
+
+	componentWillUnmount() {
+		clearInterval(this.timer)
+	}
+
+	processData() {
+		SuperAgent
+		.get('http://mcu.buoyantec.com/monitor/task_logs.json')
+		.set('Accept', 'application/json')
+		.end((error, response) => {
+			let legend_data = []
+			let xData = []
+			let series = []
+
+			response.body.task_logs.forEach((item, y, body) => {
+				legend_data.push(item.name)
+				yData.add(item.logs[0].period)
+
+				let _data = []
+
+				item.logs.forEach((log, x, logs) => {
+					if (y === 0) {
+						let time = new Date((item.time).replace(/-/g, "/"))
+						xData.push(time)
+						_data.push([time, log.period, log.spent])
+					}
+				})
+
+				series.push({
+          name: item.name,
+          type:'scatter',
+          tooltip : {
+            trigger: 'item',
+            formatter : function (params) {
+                let date = new Date(params.value[0])
+                return params.seriesName + '<br/>'
+                       + '开始时间:'
+                       + date.getFullYear() + '-'
+                       + (date.getMonth() + 1) + '-'
+                       + date.getDate() + ' '
+                       + date.getHours() + ':'
+                       + date.getMinutes()
+                       + '<br/>'
+                       + '耗时:' + params.value[2];
+            },
+            axisPointer:{type: 'cross', show: true}
+          },
+          symbol: 'circle',
+          symbolSize: function (value){
+            v = Math.round(value[2]);
+            if (v < 5) {
+              return 5;
+            } else if (v > 5 && v < 10){
+              return 10;
+            } else if (v > 10 && v < 20){
+              return 14;
+            } else if (v > 20 && v < 30){
+              return 17;
+            } else if (v > 30 && v < 70){
+              return 20;
+            } else {
+              return 25;
+            }
+          },
+          data: _data
+	      })
+			})
+
+			console.log(legend_data)
+			console.log(xData)
+			console.log(series)
+
+			let option = this.state.option
+			option.legend.data = legend_data
+			option.xAxis.data = xData
+			option.series = series
+
+			this.setState({ option: option })
+		})
 	}
 
 	render() {
@@ -110,7 +132,7 @@ export class DataProcess extends Component {
 			<div className={css.container}>
 				<div className={css.title}>接口调用</div>
 				<div id="chart_div" className={css.chart_div}>
-					<DotChart width={this.state.width} height={this.state.height}/>
+					<Chart {...this.state}/>
 				</div>
 			</div>
 		)
