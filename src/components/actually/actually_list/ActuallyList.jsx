@@ -7,19 +7,19 @@ import styles from './ActuallyList.less';
 
 const columns = [{
   title: '地点',
-  dataIndex: 'site',
+  dataIndex: 'name',
 }, {
   title: '温度',
-  dataIndex: 'temperature',
+  dataIndex: 'tempe',
 }, {
   title: '风速',
-  dataIndex: 'wind',
+  dataIndex: 'wind_speed',
 }, {
   title: '湿度',
-  dataIndex: 'humidity',
+  dataIndex: 'humi',
 }, {
   title: '雨量',
-  dataIndex: 'rainfall',
+  dataIndex: 'rain',
 }, {
   title: '气压',
   dataIndex: 'pressure',
@@ -28,61 +28,20 @@ const columns = [{
   dataIndex: 'visibility',
 }]
 
-const data = [{
-  key: '1',
-  site: '青浦',
-  temperature: 32,
-  wind: 23,
-  humidity: 34,
-  rainfall: 23,
-  pressure: 12,
-  visibility: 90,
-}, {
-  key: '2',
-  site: '金山',
-  temperature: 32,
-  wind: 23,
-  humidity: 34,
-  rainfall: 23,
-  pressure: 12,
-  visibility: 90,
-}, {
-  key: '3',
-  site: '嘉定',
-  temperature: 32,
-  wind: 23,
-  humidity: 34,
-  rainfall: 23,
-  pressure: 12,
-  visibility: 90,
-}, {
-  key: '4',
-  site: '徐家汇',
-  temperature: 32,
-  wind: 23,
-  humidity: 34,
-  rainfall: 23,
-  pressure: 12,
-  visibility: 90,
-}, {
-  key: '5',
-  site: '奉贤',
-  temperature: 32,
-  wind: 23,
-  humidity: 34,
-  rainfall: 23,
-  pressure: 12,
-  visibility: 90,
-}]
-
 export class ActuallyList extends Component {
   constructor(props) {
     super(props);
     this.state = {
+
     }
   }
 
+  componentDidMount() {
+    // console.log(this.props.stations);
+  }
+
   render() {
+    const data = this.props.stations
     return (
       <div className={styles.ActuallyList_content}>
         <Table columns={columns} dataSource={data} pagination={false} />

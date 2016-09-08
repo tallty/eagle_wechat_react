@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import styles from './toolbar.less'
 import { Row, Col } from 'antd'
-import { Time } from '../Time/Time'
+import { Time } from '../time/Time'
+import { Statistics } from './Statistics'
 
 export class Toolbar extends Component {
 	render() {
@@ -10,10 +11,7 @@ export class Toolbar extends Component {
         <Col span={4} className={styles.logo_pic_content}>
           <img src="src/images/logo.png" alt="" className={styles.logo_pic} />智慧气象服务云平台
         </Col>
-        <Col span={5} className={styles.amount} >59,235,594</Col>
-        <Col span={5} className={styles.today_amount}><img src="src/images/up_icon.svg" alt="" className={styles.up_icon} />175,666</Col>
-        <Col span={5} className={styles.upload_amount}><img src="src/images/down_icon.svg" alt="" className={styles.down_icon} />2,077,777</Col>
-        <Col span={1} className={styles.time_component}><div className={styles.white_line}></div></Col>
+        <Statistics />
         <Col span={4} className={styles.time_component}>
           <Time />
         </Col>
