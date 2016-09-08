@@ -2,6 +2,30 @@ import React, { Component, PropTypes } from 'react'
 import echarts from 'echarts'
 
 export class Chart extends Component {
+	// chart 主题色
+	color = [
+    "#ff7f50",
+    "#87cefa",
+    "#D274CE",
+    "#32cd32",
+    "#6495ed",
+    "#ff69b4",
+    "#ba55d3",
+    "#cd5c5c",
+    "#ffa500",
+    "#40e0d0",
+    "#1e90ff",
+    "#ff6347",
+    "#7b68ee",
+    "#00fa9a",
+    "#ffd700",
+    "#6699FF",
+    "#ff6666",
+    "#3cb371",
+    "#b8860b",
+    "#30e0e0"
+]
+
 	componentDidMount() {
 		const { event } = this.props
 		this.drawChart()
@@ -28,10 +52,11 @@ export class Chart extends Component {
 
 	drawChart() {
 		const node = this.refs.chart
-
-		if (this.props.option) {
+		let option = this.props.option
+		if (option) {
+			option.color = this.color
 			this.chart = echarts.init(node)
-			this.chart.setOption(this.props.option)
+			this.chart.setOption(option)
 		}
 	}
 

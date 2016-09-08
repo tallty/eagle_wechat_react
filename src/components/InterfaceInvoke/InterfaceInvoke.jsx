@@ -18,9 +18,9 @@ export class InterfaceInvoke extends Component {
 		  },
 		  grid: {
 		    show: false, 
-		    borderWidth: 0, 
+		    borderWidth: 0,
 		    x: 5, 
-		    x2: 10, 
+		    x2: 15, 
 		    y2: 10,
 		    containLabel: true
 		  },
@@ -36,7 +36,7 @@ export class InterfaceInvoke extends Component {
 	    	splitLine: {show: false},
 	    	axisLabel: {textStyle: {color: '#fff'}}
 	    }],
-	    animation: false,
+	    animationDuration: 0,
 		  series: []
 		},
 		pie_option: {
@@ -57,31 +57,32 @@ export class InterfaceInvoke extends Component {
 		    y2: 5,
 		    containLabel: true
 		  },
-		  animation: false,
+		  animationDuration: 0,
 	    series: [
         {
-            name:'访问来源',
-            type:'pie',
-            selectedMode: 'single',
-            radius: [0, '45%'],
-
-            label: {
-                normal: {
-                    position: 'inner'
-                }
-            },
-            labelLine: {
-                normal: {
-                    show: false
-                }
-            },
-            data:[]
+          name:'访问来源',
+          type:'pie',
+          itemStyle: {normal: {opacity: 0.6}},
+          selectedMode: 'single',
+          radius: [0, '40%'],
+          label: {
+            normal: {
+              position: 'inner'
+            }
+          },
+          labelLine: {
+            normal: {
+              show: false
+            }
+          },
+          data:[]
         },
         {
-            name:'访问来源',
-            type:'pie',
-            radius: ['60%', '75%'],
-            data:[]
+          name:'访问来源',
+          type:'pie',
+          itemStyle: {normal: {opacity: 0.6}},
+          radius: ['55%', '70%'],
+          data:[]
         }
 	    ]
 		}
@@ -146,7 +147,8 @@ export class InterfaceInvoke extends Component {
 				name: name,
         type:'line',
         stack: '总量',
-        itemStyle: {normal: {areaStyle: {type: 'default'}}},
+        smooth: true,
+        itemStyle: {normal: {areaStyle: {type: 'default', opacity: 0.4}}},
         data: data
 			})
 		})

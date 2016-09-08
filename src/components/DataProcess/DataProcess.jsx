@@ -17,7 +17,7 @@ export class DataProcess extends Component {
         }
       },
       legend: {data: [], textStyle: {color: '#fff'}},
-      grid: {show: false, left: 2, top: 40, bottom: 5, right: 18, containLabel: true},
+      grid: {show: false, left: 5, top: 60, bottom: 10, right: 24, containLabel: true},
       xAxis : [
         {
           type: 'time', data: [], splitLine: {show: false},
@@ -25,7 +25,7 @@ export class DataProcess extends Component {
         }
       ],
       yAxis : [{type : 'value',splitNumber: 2, splitLine: {show: false}, axisLabel: {textStyle: {color: '#fff'}}}],
-      animation: false,
+      animationDuration: 0,
       series : []
 	  }
 	}
@@ -71,23 +71,22 @@ export class DataProcess extends Component {
 				series.push({
           name: item.name,
           type:'scatter',
+          itemStyle: {normal: {opacity: 0.6}},
           tooltip : {
             trigger: 'item',
             formatter : function (params) {
                 let date = new Date(params.value[0])
                 return params.seriesName + '<br/>'
-                       + '开始时间:'
+                       + '开始时间: '
                        + date.getFullYear() + '-'
                        + (date.getMonth() + 1) + '-'
                        + date.getDate() + ' '
                        + date.getHours() + ':'
                        + date.getMinutes()
                        + '<br/>'
-                       + '耗时:' + params.value[2];
-            },
-            axisPointer:{type: 'cross', show: true}
+                       + '耗时: ' + params.value[2];
+            }
           },
-          symbol: 'circle',
           symbolSize: function (value){
             let v = Math.round(value[2]);
             if (v < 5) {
