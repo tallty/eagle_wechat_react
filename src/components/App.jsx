@@ -21,7 +21,7 @@ export class App extends Component {
       <div className={styles.app_content}>
         <Toolbar/>
         <Row className={styles.content}>
-          <Col span={16} style={{height: "100%"}}>
+          <Col span={17} style={{height: "100%"}}>
             {/*接口调用*/}
             <Col span={24} className={styles.interface_container} >
               <div className={styles.bg_border}>接口调用</div>
@@ -38,7 +38,7 @@ export class App extends Component {
             </Col>
           </Col>
           {/*实况数据*/}
-          <Col span={8} className={styles.real_time_container}>
+          <Col span={7} className={styles.real_time_container}>
             <div className={styles.bg_border}>
               <Actually />
             </div>
