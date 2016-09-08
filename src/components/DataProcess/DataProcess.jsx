@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-import css from './interface_invoke.less'
+import css from './data_process.less'
 import SuperAgent from 'superagent'
 import echarts from 'echarts'
+import { DotChart } from './DotChart'
 
-export class PieChart extends Component {
+export class DataProcess extends Component {
 	state = {
+		height: 100,
+		width: 100,
 		option: {
 		  tooltip : { trigger: 'axis' },
 		  legend: {
@@ -88,17 +91,28 @@ export class PieChart extends Component {
 	}
 
 	componentDidMount() {
-		SuperAgent.get('http://mcu.buoyantec.com/monitor/interfaces.json')
+		let row = document.getElementById("chart_div")
+		let width = row.clientWidth
+		let height = row.clientHeight
+
+		SuperAgent.get('http://mcu.buoyantec.com/monitor/task_logs.json')
 					.set('Accept', 'application/json')
 					.end((error, response) => {
-						let myChart = echarts.init(ReactDOM.findDOMNode(this))
-						myChart.setOption(this.state.option)
+						this.setState({
+							height: height,
+							width: width
+						})
 					})
 	}
 
 	render() {
 		return (
-			<div style={{width: this.props.width, height: this.props.height}}></div>
+			<div className={css.container}>
+				<div className={css.title}>接口调用</div>
+				<div id="chart_div" className={css.chart_div}>
+					<DotChart width={this.state.width} height={this.state.height}/>
+				</div>
+			</div>
 		)
 	}
 }
