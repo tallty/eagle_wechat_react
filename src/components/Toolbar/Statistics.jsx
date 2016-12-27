@@ -40,9 +40,9 @@ export class Statistics extends Component {
   render() {
     return (
       <Col span={11} offset={2} className={styles.statistics}>
-        <Col span={8} className={styles.amount} >{this.state.all_interface_count}</Col>
-        <Col span={8} className={styles.today_amount}><img src="src/images/up_icon.svg" alt="" className={styles.up_icon} />{this.state.today_interface_count}</Col>
-        <Col span={8} className={styles.upload_amount}><img src="src/images/down_icon.svg" alt="" className={styles.down_icon} />{this.state.upload_count}</Col>
+        <Col span={8} className={styles.amount} ><span>{this.state.all_interface_count}</span><span>总浏览</span></Col>
+        <Col span={8} className={styles.today_amount}><span><img src="src/images/up_icon.svg" alt="" className={styles.up_icon} />{this.state.today_interface_count}</span><span>徽章上传数</span></Col>
+        <Col span={8} className={styles.upload_amount}><span><img src="src/images/down_icon.svg" alt="" className={styles.down_icon} />{this.state.upload_count}</span><span>今日访问</span></Col>
       </Col>
     )
   }
