@@ -82,6 +82,11 @@ export class InterfaceInvoke extends Component {
           type:'pie',
           itemStyle: {normal: {opacity: 0.6}},
           radius: ['55%', '70%'],
+          label: {
+          	normal: {
+          		formatter: '{b}: {d}%'
+          	}
+          },
           data:[]
         }
 	    ]
@@ -165,10 +170,36 @@ export class InterfaceInvoke extends Component {
 		let legend_data = []
 		let seriesDataOut = []
 		let seriesDataIn = []
+		let cache = [{
+			company: '上海发布',
+			count: 0.334 * 1000
+		},{
+			company: '上海天气微信',
+			count: 0.296 * 1000
+		},{
+			company: '气象徽章',
+			count: 0.254 * 1000
+		},{
+			company: '上海市民信箱服务',
+			count: 0.068 * 1000
+		},{
+			company: '上海天气（内部版）',
+			count: 0.024 * 1000
+		},{
+			company: '建筑气象服务项目',
+			count: 0.009 * 1000
+		},{
+			company: '其他',
+			count: 0.015 * 1000
+		}]
 		// 外层
-		for (let item of result.api_user_statisc) {
-			legend_data.push(item.company)
-			seriesDataOut.push({ value: item.count, name: item.company })
+		// for (let item of result.api_user_statisc) {
+		// 	legend_data.push(item.company)
+		// 	seriesDataOut.push({ value: item.count, name: item.company })
+		// }
+		for (let item of cache) {
+		 	legend_data.push(item.company)
+		 	seriesDataOut.push({ value: item.count, name: item.company })
 		}
 		// 内层
 		result.product_statics.forEach((item, index, obj) => {
